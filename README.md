@@ -3,13 +3,13 @@ This is a multi-stage MIPS processor I designed using HDL language verilog. The 
 All 4 stages along with the FSM overview are presented below in the complete datapapth of the processor.The instructions that this processor is designed to run are only those given in the programm.txt
 file, this is in the context of a university course I took. However, this is a general implementation that can easily be extended to a normal PROCESSOR running all MIPS instructions. The 32-bit version of each sequential instruction is presented
 in the rom.data file. 
-** All the RTL view were generated using Intel Quartus Prime 17.0 software, while the behavioral simulation of every testbench was implemented using the XilinX software, you can find all RTL views as well as the datapath of the processor in the RTL views file.
+## All the RTL view were generated using Intel Quartus Prime 17.0 software, while the behavioral simulation of every testbench was implemented using the XilinX software, you can find all RTL views as well as the datapath of the processor in the RTL views file.
 - IFSTAGE is responsible for fetching every new instruction from ROM memory , the PC counter looks for the next command by getting incremented with the appropriate value (+4 or +4+Immediate)
 - DECSTAGE is responsible of recognizing the instruction given by splitting the 32-bits in parts and then operating based on if the command is of I-format or R-format. A register file of 32 32-bit registers is used to here also that outputs 2 32-bit registers, RF_A and RF_B. 
 - ALUSTAGE consists of 32-bit 2 input ALU and MUX that decides whether to choose from RF_B or Immed to perform an R-format operation or I-format respectively. Depending on the ALU_func given it performs the right operation with both 32-bit vectors. (Immed is originally 16 bits but it is extended properly according to the array of instructions provided below)
 - MEMSTAGE is basically our RAM memory of 1024 adresses of 32-bit vectors. It either writes the data MEM_DataIn on the adress given by ALU_MEM_Addr or reads from that adress according to MEM_WrEn value (1 or 0 respectively)
 
-*** The complete datapath 
+### The complete datapath 
 ![Datapath](https://github.com/ladiasnk/Multi-stage-non-pipelined-MIPS-processor-using-verilog/blob/main/RTL%20views/datapath.png)
 
 
@@ -21,15 +21,17 @@ This non-pipelined processor is based on a subset of the instruction set archite
 - Memory commands: lw, sw
 
 The above commands have two types of format:
--R format
+- R format
 | Opcode      | rs         | rd | rt | not used | func   |
 |-------------|:-------------:|-----:|--------:|-------:|------:|
 | 6 bits     | 5 bits      |   5 bits    | 5 bits| 5 bits |  6 bits  |
--I format
+
+- I format
 | Opcode      | rs         | rd | Immediate   |
 |-------------|:-------------:| -----:|------:|
 | 6 bits     | 5 bits      |   5 bits    | 16 bits  |
-*** Commands are coded according to the following table:
+
+### Commands are coded according to the following table:
 | Opcode      | FUNC         | COMMAND | OPERATION |
 | ------------- |:-------------:| -----:|  --------:|
 | 100000      | 110000       |   add    |  RF[rd] <-- RF[rs] + RF[rt]                        | 
@@ -60,7 +62,7 @@ The above commands have two types of format:
 | 011111      |      -       |   sw     | MEM[RF[rs] + SignExtend(Imm)] <-- RF[rd]           | 
 
 
-*** File hierarchy :
+### File hierarchy :
 - ALU.v , implements the ALU module only
 - ALUSTAGE.v , connects ALU with a mux using a top level module ALU_main
 - IFSTAGE.v , uses a ROM memory, a mux and a top level module command_unit to implement the entire stage 
