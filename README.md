@@ -10,7 +10,7 @@ in the rom.data file.
 - MEMSTAGE is basically our RAM memory of 1024 adresses of 32-bit vectors. It either writes the data MEM_DataIn on the adress given by ALU_MEM_Addr or reads from that adress according to MEM_WrEn value (1 or 0 respectively)
 
 *** The complete datapath 
-![Datapath](https://github.com/ladiasnk/Multi-stage%MIPS%processor%in%verilog/blob/main/RTL%views/datapath.png)
+![Datapath](https://github.com/ladiasnk/Multi-stage-non-pipelined-MIPS-processor-using-verilog/blob/main/RTL%20views/datapath.png)
 
 
 This non-pipelined processor is based on a subset of the instruction set architecture which consists of the following elements:
