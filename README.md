@@ -52,7 +52,7 @@ The above commands have two types of format:
 | 110010      |      -       |   andi   |  RF[rd] <-- RF[rs] & ZeroFill(Imm)                 |
 | 110011      |      -       |   ori    |  RF[rd] <-- RF[rs] | ZeroFill(Imm)                 | 
 | 111111      |      -       |   b      |  PC <-- PC + 4 + (SignExtend(Imm) << 2)            | 
-| 000000      |      -       |   beq    |if (RF[rs] == RF[rd])<br> &ensp; &ensp; &ensp; &ensp;  PC <-- PC + 4 + (SignExtend(Imm) << 2) <br>else  <br> &ensp; &ensp; &ensp; &ensp;   PC<-- PC + 4   |  
+| 000000      |      -       |   beq    |if (RF[rs] == RF[rd])<br> PC <-- PC + 4 + (SignExtend(Imm) << 2) <br>else  <br> PC<-- PC + 4   |  
 | 000001      |      -       |   bne    | if (RF[rs] != RF[rd])<br> &ensp;  PC <-- PC + 4 + (SignExtend(Imm) << 2) <br>else  <br>&ensp;PC<-- PC + 4   | 
 | 001111      |      -       |   lw     | RF[rd] <-- MEM[RF[rs] + SignExtend(Imm)]           | 
 | 011111      |      -       |   sw     | MEM[RF[rs] + SignExtend(Imm)] <-- RF[rd]           | 
@@ -62,7 +62,7 @@ The above commands have two types of format:
 - ALU.v , implements the ALU module only
 - ALUSTAGE.v , connects ALU with a mux using a top level module ALU_main
 - IFSTAGE.v , uses a ROM memory, a mux and a top level module command_unit to implement the entire stage 
-- register_file.v , implements the entire register file using 32 32-bit registers, a decoder 5-to-32 , 2 32-to-1 muxes and connects all WE lines of all registers to WrEn of the registrer file using AND gates
+- register_file.v , implements the entire register file using 32 32-bit registers, a decoder 5-to-32 , 2 32-to-1 muxes and connects all WE lines of all registers to WrEn of the register file using AND gates. Register R0 is always zero
 - DECSTAGE , uses a register file, 2 muxes and a Immediate_extension module and top level module decode_unit
 - MEMSTAGE , uses only a MEMSTAGE module where the RAM memory is located , and a top level module MEM_main
-
+- Datapath.v is used to make all the internal connections of the individual stages, it outputs the next Instruction for each cycle and the Zero to be given to ALU, this is useful to some instructions where an operation with zero and RF_A is done to implement li,lui,ori,addi,andi operations
