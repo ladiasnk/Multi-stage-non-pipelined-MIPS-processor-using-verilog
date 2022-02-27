@@ -67,3 +67,30 @@ The above commands have two types of format:
 - MEMSTAGE , uses only a MEMSTAGE module where the RAM memory is located , and a top level module MEM_main
 - Datapath.v is used to make all the internal connections of the individual stages, it outputs the next Instruction for each cycle and the Zero to be given to ALU, this is useful to some instructions where an operation with zero and RF_A is done to implement li,lui,ori,addi,andi operations
 - Processor.v connects datapth to the control unit of the processor , which is a Finite State machine
+
+### Behavioral simulations
+Using the ISE_14.7_VIRTUAL_MACHINE through the Oracle VM VirtualBox and the Xilinx tools, behavioral simulations of all stages and the final processor were made.
+
+#### ALU
+
+To simulate ALU 32 bit values were given to both inputs to test the various operations it performs. The Zero output takes the value 1 when all the digits of out are 0, otherwise it takes the value 0, it is thus obviously a reg signal.
+![ALU](https://github.com/ladiasnk/Multi-stage-non-pipelined-MIPS-processor-using-verilog/blob/main/Behavioral_simulations/ALU.jpg)
+#### IFSTAGE
+
+For the IFSTAGE stage, an IFSTAGE module for memory was created, along with PC, mux2to1_32bit and command_unit where  the final wiring was done. At the beginning of the simulation reset is enabled for the PC to start the operation correctly. In the simulation with sequential accesses you can see that the instruction read back to the output each time is the next one from the rom.data file. 
+![IFSTAGE](https://github.com/ladiasnk/Multi-stage-non-pipelined-MIPS-processor-using-verilog/blob/main/Behavioral_simulations/IFSTAGE.jpg)
+Enabling other values for writing to the PC with different values for PC_Immed other commands are read from the rom.data file corresponding to the PC+4+Immediate operation for PC_sel = 1 and PC+4 for PC_sel = 0 at each subsequent clock rise.
+![IFSTAGE](https://github.com/ladiasnk/Multi-stage-non-pipelined-MIPS-processor-using-verilog/blob/main/Behavioral_simulations/IFSTAGE_2.jpg)
+#### DECSTAGE
+
+From the behavioral simulation data from RF_A register1 are read and data from RF_B register2 are read also, which are either Instr(15-11) when the value of RF_B_sel is 0, or Instr(20-16) when the value of RF_B_sel is 1. In Immed all 32 bits depend on the opcode of Instr. As shown in the corresponding testbench , first a value is given to register1  , in order to read at position 01000, and it is selected  to write the MEM_out data ,giving RF_WrData_sel a value of 1. After a delay, the data are read, from the same register to verify that the write was done , while at the same time data are written to the ALU_out , in register 11010. Also, Immediate_extension does the corresponding extension of Immed, depending on the instruction  fetched. More on this in the testbench.
+![DECSTAGE](https://github.com/ladiasnk/Multi-stage-non-pipelined-MIPS-processor-using-verilog/blob/main/Behavioral_simulations/DECTAGE.jpg)
+#### ALUSTAGE
+
+In the behavioral simulation, depending on ALU_func, the instruction with the corresponding func is executed for the value of register RF_A and the value of register RF_B for ALU_Bin_sel 0, while for ALU_Bin_sel 1 the operation is performed with the value Immed. In the testbench, a first performance of an OR operation between the two 32-bit vectors of RF_A and RF_B is made and then the Immed is selected , the same func as add is given to perform the addi. Note: In addi instructions the rt direction points to register 0 and so an operation 0+Immed=Immed is performed (since A has a value of zero because register 0 is always 0).
+![ALUSTAGE](https://github.com/ladiasnk/Multi-stage-non-pipelined-MIPS-processor-using-verilog/blob/main/Behavioral_simulations/ALUSTAGE.jpg)
+#### MEMSTAGE
+
+
+In the behavioral simulation at the beginning a value is written with Mem_WrEn = 1, and after a period  a 0 is given to Mem_WrEn to read the corresponding value. The procedure is then repeated to verify the sequential assignment-reading. Also shown, is the RAM address data are written to, in a waveform.
+![MEMSTAGE](https://github.com/ladiasnk/Multi-stage-non-pipelined-MIPS-processor-using-verilog/blob/main/Behavioral_simulations/MEMSTAGE.jpg)
