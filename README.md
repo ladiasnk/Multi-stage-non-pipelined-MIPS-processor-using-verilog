@@ -52,7 +52,7 @@ The above commands have two types of format:
 | 110010      |      -       |   andi   |  RF[rd] <-- RF[rs] & ZeroFill(Imm)                 |
 | 110011      |      -       |   ori    |  RF[rd] <-- RF[rs] | ZeroFill(Imm)                 | 
 | 111111      |      -       |   b      |  PC <-- PC + 4 + (SignExtend(Imm) << 2)            | 
-| 000000      |      -       |   beq    |if (RF[rs] == RF[rd])<br> &ensp;  PC <-- PC + 4 + (SignExtend(Imm) << 2) <br>else  <br>&ensp; PC<-- PC + 4   |  
+| 000000      |      -       |   beq    |if (RF[rs] == RF[rd])<br> &ensp; &ensp; &ensp; &ensp;  PC <-- PC + 4 + (SignExtend(Imm) << 2) <br>else  <br> &ensp; &ensp; &ensp; &ensp;   PC<-- PC + 4   |  
 | 000001      |      -       |   bne    | if (RF[rs] != RF[rd])<br> &ensp;  PC <-- PC + 4 + (SignExtend(Imm) << 2) <br>else  <br>&ensp;PC<-- PC + 4   | 
 | 001111      |      -       |   lw     | RF[rd] <-- MEM[RF[rs] + SignExtend(Imm)]           | 
 | 011111      |      -       |   sw     | MEM[RF[rs] + SignExtend(Imm)] <-- RF[rd]           | 
