@@ -22,11 +22,13 @@ This non-pipelined processor is based on a subset of the instruction set archite
 
 The above commands have two types of format:
 - R format
+
 | Opcode      | rs         | rd | rt | not used | func   |
 |-------------|:-------------:|-----:|--------:|-------:|------:|
 | 6 bits     | 5 bits      |   5 bits    | 5 bits| 5 bits |  6 bits  |
 
 - I format
+
 | Opcode      | rs         | rd | Immediate   |
 |-------------|:-------------:| -----:|------:|
 | 6 bits     | 5 bits      |   5 bits    | 16 bits  |
@@ -50,8 +52,8 @@ The above commands have two types of format:
 | 110010      |      -       |   andi   |  RF[rd] <-- RF[rs] & ZeroFill(Imm)                 |
 | 110011      |      -       |   ori    |  RF[rd] <-- RF[rs] | ZeroFill(Imm)                 | 
 | 111111      |      -       |   b      |  PC <-- PC + 4 + (SignExtend(Imm) << 2)            | 
-| 000000      |      -       |   beq    |if (RF[rs] == RF[rd])<br> &ensp;  PC <-- PC + 4 + (SignExtend(Imm) << 2) <br>else  <br>&ensp; PC<-- PC + 4    |  
-| 000001      |      -       |   bne    | if (RF[rs] != RF[rd])<br> &ensp;;  PC <-- PC + 4 + (SignExtend(Imm) << 2) <br>else  <br>&ensp;PC<-- PC + 4   | 
+| 000000      |      -       |   beq    |if (RF[rs] == RF[rd])<br> &ensp;  PC <-- PC + 4 + (SignExtend(Imm) << 2) <br>else  <br>&ensp; PC<-- PC + 4   |  
+| 000001      |      -       |   bne    | if (RF[rs] != RF[rd])<br> &ensp;  PC <-- PC + 4 + (SignExtend(Imm) << 2) <br>else  <br>&ensp;PC<-- PC + 4   | 
 | 001111      |      -       |   lw     | RF[rd] <-- MEM[RF[rs] + SignExtend(Imm)]           | 
 | 011111      |      -       |   sw     | MEM[RF[rs] + SignExtend(Imm)] <-- RF[rd]           | 
 
