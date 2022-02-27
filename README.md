@@ -50,10 +50,7 @@ The above commands have two types of format:
 | 110010      |      -       |   andi   |  RF[rd] <-- RF[rs] & ZeroFill(Imm)                 |
 | 110011      |      -       |   ori    |  RF[rd] <-- RF[rs] | ZeroFill(Imm)                 | 
 | 111111      |      -       |   b      |  PC <-- PC + 4 + (SignExtend(Imm) << 2)            | 
-| 000000      |      -       |   beq    |  if (RF[rs] == RF[rd])       <br>                  |
-                                              PC <-- PC + 4 + (SignExtend(Imm) << 2) <br>        
-                                           else                                      <br>        
-                                              PC <-- PC + 4                                  
+| 000000      |      -       |   beq    |  if (RF[rs] == RF[rd])       <br>      PC <-- PC + 4 + (SignExtend(Imm) << 2) <br>        else  <br> PC<-- PC + 4    |  
 | 000001      |      -       |   bne    |   if (RF[rs] != RF[rd])                      <br>      |
                                                  PC <-- PC + 4 + (SignExtend(Imm) << 2)   <br> 
                                             else                                          <br>
