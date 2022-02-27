@@ -51,13 +51,13 @@ The above commands have two types of format:
 | 110011      |      -       |   ori    |  RF[rd] <-- RF[rs] | ZeroFill(Imm)                 | 
 | 111111      |      -       |   b      |  PC <-- PC + 4 + (SignExtend(Imm) << 2)            | 
 | 000000      |      -       |   beq    |  if (RF[rs] == RF[rd])                             |
-                                              PC <-- PC + 4 + (SignExtend(Imm) << 2)        
-                                           else                                             
-                                              PC <-- PC + 4                                 
+|             |              |          |          PC <-- PC + 4 + (SignExtend(Imm) << 2)    |    
+|             |              |          |      else                                          |   
+|             |              |          |        PC <-- PC + 4                               |  
 | 000001      |      -       |   bne    |   if (RF[rs] != RF[rd])                            |
-                                              PC <-- PC + 4 + (SignExtend(Imm) << 2)        
-                                           else                                             
-                                              PC <-- PC + 4                                  
+|             |              |          |         PC <-- PC + 4 + (SignExtend(Imm) << 2)     |
+|             |              |          |      else                                          |
+|             |              |          |         PC <-- PC + 4                              |
 | 001111      |      -       |   lw     | RF[rd] <-- MEM[RF[rs] + SignExtend(Imm)]           | 
 | 011111      |      -       |   sw     | MEM[RF[rs] + SignExtend(Imm)] <-- RF[rd]           | 
 
