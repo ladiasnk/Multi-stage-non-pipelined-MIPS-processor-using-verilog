@@ -1,6 +1,6 @@
 # Multi-stage MIPS processor in verilog
 This is a multi-stage MIPS processor I designed using HDL language verilog. The processor consists of 4 stages and a control-FSM(Finite State Machine).
-All 4 stages along with the FSM overview are presented below in the complete datapapth of the processor.The instructions that this processor is designed to run are only those given in the programm.txt
+All 4 stages along with the FSM overview are presented below in the complete datapath of the processor.The instructions that this processor is designed to run are only those given in the programm.txt
 file, this is in the context of a university course I took. However, this is a general implementation that can easily be extended to a normal PROCESSOR running all MIPS instructions. The 32-bit version of each sequential instruction is presented
 in the rom.data file. 
 ## All the RTL views were generated using Intel Quartus Prime 17.0 software, while the behavioral simulation of every testbench was implemented using the XilinX software, you can find all RTL views as well as the datapath of the processor in the RTL views file.
